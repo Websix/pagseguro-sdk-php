@@ -61,7 +61,9 @@ trait Sender
         }
 
         $senderClass = new \PagSeguro\Domains\Sender();
-        $this->sender = $senderClass->setName(current($sender->name))
+        $senderName = $sender->name ?: ($sender->holderName ?: null);
+        
+        $this->sender = $senderClass->setName(current($senderName))
             ->setEmail(current($sender->email))
             ->setPhone($phone)
             ->setDocuments(new Document());

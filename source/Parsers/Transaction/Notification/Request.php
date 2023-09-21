@@ -42,7 +42,7 @@ class Request extends Error implements Parser
     public static function success(Http $http)
     {
         $xml = simplexml_load_string($http->getResponse());
-
+        
         $response = new Response();
         $response->setDate(current($xml->date))
             ->setCode(current($xml->code))
@@ -60,7 +60,7 @@ class Request extends Error implements Parser
             ->setInstallmentCount(current($xml->installmentCount))
             ->setItemCount(current($xml->itemCount))
             ->setItems($xml->items)
-            ->setSender($xml->sender ?: ($xml->pix ?: []))
+            ->setSender($xml->sender)
             ->setShipping($xml->shipping);
         return $response;
     }
