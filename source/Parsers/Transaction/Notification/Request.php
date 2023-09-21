@@ -60,7 +60,7 @@ class Request extends Error implements Parser
             ->setInstallmentCount(current($xml->installmentCount))
             ->setItemCount(current($xml->itemCount))
             ->setItems($xml->items)
-            ->setSender($xml->sender)
+            ->setSender($xml->sender ?: ($xml->pix ?: []))
             ->setShipping($xml->shipping);
         return $response;
     }
